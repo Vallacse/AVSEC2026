@@ -14,7 +14,6 @@
             --text-dark: #111;
         }
 
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -24,16 +23,12 @@
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
-            background-image: linear-gradient(135deg,
-                    var(--bg-color),
-                    #ffffff);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
-            overflow: hidden;
-            /* Prevent scrollbars from the background */
+            padding: 15px; /* Better padding for mobile */
+            overflow-x: hidden;
         }
 
         /* Dynamic Loop Background */
@@ -50,91 +45,61 @@
             justify-content: center;
             pointer-events: none;
             background: #ffffff;
+            opacity: 0.5;
         }
 
         .loop-row {
             font-family: 'Times New Roman', Times, serif;
             white-space: nowrap;
-            font-size: 20px;
+            font-size: 1.2rem;
             font-weight: 600;
             letter-spacing: 6px;
-            color: rgba(0, 0, 0, 0.12);
+            color: rgba(0, 0, 0, 0.08);
             line-height: 1.8;
-            user-select: none;
         }
 
-        /* Animations for smoothness */
-        .loop-row:nth-child(odd) {
-            animation: slideLeft 40s linear infinite;
-        }
+        .loop-row:nth-child(odd) { animation: slideLeft 40s linear infinite; }
+        .loop-row:nth-child(even) { animation: slideRight 45s linear infinite; }
 
-        .loop-row:nth-child(even) {
-            animation: slideRight 45s linear infinite;
-        }
+        @keyframes slideLeft { from { transform: translateX(0); } to { transform: translateX(-1000px); } }
+        @keyframes slideRight { from { transform: translateX(-1000px); } to { transform: translateX(0); } }
 
-        @keyframes slideLeft {
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(-1000px);
-            }
-        }
-
-        @keyframes slideRight {
-            from {
-                transform: translateX(-1000px);
-            }
-
-            to {
-                transform: translateX(0);
-            }
-        }
-
+        /* Form Box Responsiveness */
         .form-box {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 500px;
+            max-width: 450px; /* Standard form width */
+            z-index: 10;
         }
 
-        .header_logo {
-            max-height: 1000%;
-            /* ensures it never grows */
-            max-width: 1000%;
-            object-fit: contain;
-        }
-
+        /* Fixed Logo Container inside the form */
         .logo-wrapper {
             width: 100%;
-            height: 20px;
-            /* FIXED height, not % */
+            height: auto;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+        }
 
+        .header_logo {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px; /* Limits size on desktop while staying responsive */
+            object-fit: contain;
         }
 
         h2 {
             color: var(--grad-end);
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-
-        h3 {
-            color: #555;
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-            font-weight: 400;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
         }
 
         .form-group {
@@ -143,53 +108,78 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
-            color: #333;
+            color: #444;
+            font-size: 0.9rem;
         }
 
         input[type="text"],
         input[type="file"] {
             width: 100%;
-            padding: 12px;
+            padding: 10px 12px;
             border: 2px solid #ddd;
             border-radius: 8px;
             font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--grad-start);
         }
 
         button {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: linear-gradient(to right, var(--grad-start), var(--grad-end));
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.98);
         }
 
         #idCanvas {
             display: none;
         }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .form-box {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            .header_logo {
+                max-height: 60px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <!-- Background Container -->
     <div class="loop-container" id="loopContainer"></div>
+
     <div class="form-box">
         <div class="logo-wrapper">
-            <img src="./logo.png" class="header_logo" />
+            <img src="./logo.png" alt="College Logo" class="header_logo" />
         </div>
+        
         <h2>Future Identity Card</h2>
-
 
         <form id="idForm">
             <div class="form-group">
                 <label>Student Full Name</label>
-                <input type="text" id="name" placeholder="Enter your name" required>
+                <input type="text" id="name" placeholder="John Doe" required>
             </div>
             <div class="form-group">
                 <label>Dream Role</label>
@@ -203,13 +193,14 @@
                 <label>Upload Photo</label>
                 <input type="file" id="photo" accept="image/*" required>
             </div>
-            <button type="submit">Generate ID Card</button>
+            <button type="submit">Generate & Download ID</button>
         </form>
     </div>
 
     <canvas id="idCanvas" width="800" height="1000"></canvas>
 
     <script>
+        // ... (Keep your existing JavaScript code as it handles the logic perfectly) ...
         const form = document.getElementById('idForm');
         const canvas = document.getElementById('idCanvas');
         const ctx = canvas.getContext('2d');
@@ -223,6 +214,9 @@
             lightText: '#7f8c8d'
         };
 
+        const logoImg = new Image();
+        logoImg.src = './idcard.png';
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -231,7 +225,6 @@
             const company = document.getElementById('company').value;
             const photoFile = document.getElementById('photo').files[0];
 
-            // 1. Load User Photo
             const userImg = await new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.onload = (event) => {
@@ -242,7 +235,6 @@
                 reader.readAsDataURL(photoFile);
             });
 
-            // 2. Load QR Code (Centered where barcode was)
             const qrData = `https://www.google.com/search?q=${encodeURIComponent(role)}+at+${encodeURIComponent(company)}`;
             const qrImg = await new Promise((resolve) => {
                 const img = new Image();
@@ -253,18 +245,14 @@
 
             drawIDCard(name, role, company, userImg, qrImg);
         });
-        const logoImg = new Image();
-        logoImg.src = './idcard.png';
 
         function drawIDCard(name, role, company, userImg, qrImg) {
             const W = canvas.width;
             const H = canvas.height;
 
-            // Background
             ctx.fillStyle = colors.white;
             ctx.fillRect(0, 0, W, H);
 
-            // Top Gradient Wave
             const topGrad = ctx.createLinearGradient(0, 0, W, 400);
             topGrad.addColorStop(0, colors.purple);
             topGrad.addColorStop(1, colors.deepBlue);
@@ -277,24 +265,11 @@
             ctx.closePath();
             ctx.fill();
 
-            const logoScale = W / logoImg.width;     // scale by width
-            const logoWidth = W;                     // 800
+            const logoScale = W / logoImg.width;
+            const logoWidth = W;
             const logoHeight = logoImg.height * logoScale - 70;
+            ctx.drawImage(logoImg, 0, 0, logoWidth, logoHeight);
 
-            const logoX = 0;
-            const logoY = 0;
-
-            ctx.drawImage(logoImg, logoX, logoY, logoWidth, logoHeight);
-            // // College Logo (Top Center – BIG & CLEAN)
-            // const logoWidth = 800;     // increased
-            // const logoHeight = 800;    // keep 2:1 ratio
-            // const logoX = 0
-            // const logoY = -100;         // moved slightly down
-
-            // ctx.drawImage(logoImg, logoX, logoY, logoWidth, logoHeight);
-
-
-            // Cyan Accent Wave
             ctx.fillStyle = colors.cyanAccent;
             ctx.beginPath();
             ctx.moveTo(0, 320);
@@ -304,16 +279,6 @@
             ctx.closePath();
             ctx.fill();
 
-
-            // // College Header
-            // ctx.fillStyle = colors.white;
-            // ctx.textAlign = 'center';
-            // ctx.font = 'bold 34px Arial';
-            // ctx.fillText("AVS ENGINEERING COLLEGE", W / 2, 80);
-            // ctx.font = '22px Arial';
-            // ctx.fillText("(AUTONOMOUS)", W / 2, 115);
-
-            // Profile Picture Circle
             const photoRadius = 155;
             const px = W / 2;
             const py = 340;
@@ -330,25 +295,19 @@
             ctx.drawImage(userImg, px - photoRadius, py - photoRadius, photoRadius * 2, photoRadius * 2);
             ctx.restore();
 
-            // Name
             ctx.textAlign = 'center';
             ctx.fillStyle = colors.darkText;
             ctx.font = 'bold 50px Times New Roman';
             ctx.fillText(name.toUpperCase(), W / 2, 565);
 
-            // Role
             ctx.fillStyle = colors.deepBlue;
-            ctx.font = 'bold  28px Times New Roman';
+            ctx.font = 'bold 28px Times New Roman';
             ctx.fillText(role.toUpperCase(), W / 2, 615);
 
-            // Company (dark & bold)
-            ctx.fillStyle = '#111111';              // deep black, not washed
-            ctx.font = 'bold 30px Times New Roman'; // bigger = visually heavier
+            ctx.fillStyle = '#111111';
+            ctx.font = 'bold 30px Times New Roman';
             ctx.fillText(company.toUpperCase(), W / 2, 650);
 
-
-
-            // Centered QR Code (Replacing Barcode)
             const qrSize = 180;
             ctx.drawImage(qrImg, (W / 2) - (qrSize / 2), 700, qrSize, qrSize);
 
@@ -356,7 +315,6 @@
             ctx.fillStyle = '#000000';
             ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 900);
 
-            // Bottom Decorative Wave
             ctx.fillStyle = colors.deepBlue;
             ctx.beginPath();
             ctx.moveTo(0, H);
@@ -365,18 +323,16 @@
             ctx.quadraticCurveTo(W / 2, H - 100, 0, H - 40);
             ctx.fill();
 
-            // Trigger Download
             const link = document.createElement('a');
             link.download = `${name}_Career_ID.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
         }
-        // Generate Loop Background
 
         function generateBg() {
             const container = document.getElementById('loopContainer');
-            const phrase = "AVSEC   ".repeat(50);
-            const rows = 100;
+            const phrase = "AVSEC   ".repeat(30);
+            const rows = 60;
 
             for (let i = 0; i < rows; i++) {
                 const div = document.createElement('div');
@@ -385,10 +341,7 @@
                 container.appendChild(div);
             }
         }
-
         generateBg();
-
     </script>
 </body>
-
 </html>

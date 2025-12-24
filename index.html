@@ -272,7 +272,7 @@
             const logoHeight = logoImg.height * logoScale - 70;
             ctx.drawImage(logoImg, 0, 0, logoWidth, logoHeight);
 
-            ctx.fillStyle = colors.white;
+            ctx.fillStyle = colors.black;
             ctx.beginPath();
             ctx.moveTo(0, 320);
             ctx.bezierCurveTo(W * 0.3, 200, W * 0.6, 400, W, 300);
@@ -287,7 +287,7 @@
 
             ctx.beginPath();
             ctx.arc(px, py, photoRadius + 8, 0, Math.PI * 2);
-            ctx.fillStyle = colors.deepBlue;
+            ctx.fillStyle = colors.black;
             ctx.fill();
 
             ctx.save();
@@ -317,7 +317,7 @@
             ctx.fillStyle = '#000000';
             ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 900);
 
-            ctx.fillStyle = colors.new;
+            ctx.fillStyle = colors.black;
             ctx.beginPath();
             ctx.moveTo(0, H);
             ctx.lineTo(W, H);
@@ -347,5 +347,6 @@
     </script>
 </body>
 </html>
+
 
 

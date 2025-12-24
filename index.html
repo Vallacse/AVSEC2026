@@ -91,7 +91,7 @@
         .header_logo {
             max-width: 100%;
             height: auto;
-            max-height: 100px; /* Limits size on desktop while staying responsive */
+            max-height: 130px; /* Limits size on desktop while staying responsive */
             object-fit: contain;
         }
 
@@ -160,7 +160,7 @@
                 font-size: 1.2rem;
             }
             .header_logo {
-                max-height: 100px;
+                max-height: 130px;
             }
         }
     </style>
@@ -254,8 +254,8 @@
             ctx.fillRect(0, 0, W, H);
 
             const topGrad = ctx.createLinearGradient(0, 0, W, 300);
-            topGrad.addColorStop(0, colors.purple);
-            topGrad.addColorStop(1, colors.purple);
+            topGrad.addColorStop(0, colors.white);
+            topGrad.addColorStop(1, colors.white);
             ctx.fillStyle = topGrad;
             ctx.beginPath();
             ctx.moveTo(0, 0);
@@ -315,7 +315,7 @@
             ctx.fillStyle = '#000000';
             ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 900);
 
-            ctx.fillStyle = colors.deepBlue;
+            ctx.fillStyle = colors.purple;
             ctx.beginPath();
             ctx.moveTo(0, H);
             ctx.lineTo(W, H);

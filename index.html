@@ -250,12 +250,12 @@
             const W = canvas.width;
             const H = canvas.height;
 
-            ctx.fillStyle = colors.white;
+            ctx.fillStyle = colors.cyanAccent;
             ctx.fillRect(0, 0, W, H);
 
             const topGrad = ctx.createLinearGradient(0, 0, W, 300);
-            topGrad.addColorStop(0, colors.white);
-            topGrad.addColorStop(1, colors.white);
+            topGrad.addColorStop(0, colors.deepBlue);
+            topGrad.addColorStop(1, colors.deepBlue);
             ctx.fillStyle = topGrad;
             ctx.beginPath();
             ctx.moveTo(0, 0);
@@ -315,7 +315,7 @@
             ctx.fillStyle = '#000000';
             ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 900);
 
-            ctx.fillStyle = colors.cyanAccent;
+            ctx.fillStyle = colors.deepblue;
             ctx.beginPath();
             ctx.moveTo(0, H);
             ctx.lineTo(W, H);

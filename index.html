@@ -91,7 +91,7 @@
         .header_logo {
             max-width: 100%;
             height: auto;
-            max-height: 80px; /* Limits size on desktop while staying responsive */
+            max-height: 100px; /* Limits size on desktop while staying responsive */
             object-fit: contain;
         }
 
@@ -215,7 +215,7 @@
         };
 
         const logoImg = new Image();
-        logoImg.src = './idcard.png';
+        logoImg.src = './logo.png';
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -253,9 +253,9 @@
             ctx.fillStyle = colors.white;
             ctx.fillRect(0, 0, W, H);
 
-            const topGrad = ctx.createLinearGradient(0, 0, W, 400);
+            const topGrad = ctx.createLinearGradient(0, 0, W, 300);
             topGrad.addColorStop(0, colors.purple);
-            topGrad.addColorStop(1, colors.deepBlue);
+            topGrad.addColorStop(1, colors.purple);
             ctx.fillStyle = topGrad;
             ctx.beginPath();
             ctx.moveTo(0, 0);

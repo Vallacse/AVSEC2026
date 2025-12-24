@@ -178,7 +178,7 @@
 
         <form id="idForm">
             <div class="form-group">
-                <label>Full Name</label>
+                <label>Your Name</label>
                 <input type="text" id="name" placeholder="John Doe" required>
             </div>
             <div class="form-group">
@@ -270,7 +270,7 @@
             const logoHeight = logoImg.height * logoScale - 70;
             ctx.drawImage(logoImg, 0, 0, logoWidth, logoHeight);
 
-            ctx.fillStyle = colors.cyanAccent;
+            ctx.fillStyle = colors.white;
             ctx.beginPath();
             ctx.moveTo(0, 320);
             ctx.bezierCurveTo(W * 0.3, 200, W * 0.6, 400, W, 300);
@@ -315,7 +315,7 @@
             ctx.fillStyle = '#000000';
             ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 900);
 
-            ctx.fillStyle = colors.purple;
+            ctx.fillStyle = colors.cyanAccent;
             ctx.beginPath();
             ctx.moveTo(0, H);
             ctx.lineTo(W, H);

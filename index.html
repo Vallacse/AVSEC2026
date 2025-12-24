@@ -10,7 +10,7 @@
             --grad-start: #8e2de2;
             --grad-end: #4a00e0;
             --accent-cyan: #70e1f5;
-            --bg-color: #dce6f5;
+            --bg-color: #f0f2f5;
             --text-dark: #111;
         }
 
@@ -66,10 +66,10 @@
 
         /* Form Box Responsiveness */
         .form-box {
-            background: rgb(255, 255, 255);
+            background: white;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(53, 53, 53, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 450px; /* Standard form width */
             z-index: 10;
@@ -83,15 +83,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #eee;
             padding-bottom: 15px;
         }
 
         .header_logo {
-            max-width: 180%;
+            max-width: 100%;
             height: auto;
-            max-height: 130px; /* Limits size on desktop while staying responsive */
+            max-height: 80px; /* Limits size on desktop while staying responsive */
             object-fit: contain;
         }
 
@@ -160,7 +160,7 @@
                 font-size: 1.2rem;
             }
             .header_logo {
-                max-height: 120px;
+                max-height: 100px;
             }
         }
     </style>
@@ -174,11 +174,11 @@
             <img src="./logo.png" alt="College Logo" class="header_logo" />
         </div>
         
-        <h2>FUTURE IDENTITY CARD</h2>
+        <h2>Future Identity Card</h2>
 
         <form id="idForm">
             <div class="form-group">
-                <label>Your Name</label>
+                <label>Full Name</label>
                 <input type="text" id="name" placeholder="John Doe" required>
             </div>
             <div class="form-group">
@@ -193,7 +193,7 @@
                 <label>Upload Photo</label>
                 <input type="file" id="photo" accept="image/*" required>
             </div>
-            <button type="submit">GET YOUR DREAM ID CARD</button>
+            <button type="submit">Get your Dream ID Card</button>
         </form>
     </div>
 
@@ -250,55 +250,44 @@
             const W = canvas.width;
             const H = canvas.height;
 
-            // 1. Fill background with white
             ctx.fillStyle = colors.white;
             ctx.fillRect(0, 0, W, H);
 
-            // --- NEW TOP DESIGN: White and Blue Waves ---
-            
-            // Primary Deep Blue Wave
-            ctx.fillStyle = colors.deepBlue;
+            const topGrad = ctx.createLinearGradient(0, 0, W, 400);
+            topGrad.addColorStop(0, colors.purple);
+            topGrad.addColorStop(1, colors.deepBlue);
+            ctx.fillStyle = topGrad;
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(W, 0);
-            ctx.lineTo(W, 150);
-            ctx.bezierCurveTo(W * 0.75, 220, W * 0.25, 80, 0, 180);
+            ctx.lineTo(W, 300);
+            ctx.bezierCurveTo(W * 0.6, 400, W * 0.3, 200, 0, 320);
             ctx.closePath();
             ctx.fill();
-
-            // Secondary Cyan Accent Wave
-            ctx.fillStyle = colors.cyanAccent;
-            ctx.beginPath();
-            ctx.moveTo(0, 180);
-            ctx.bezierCurveTo(W * 0.25, 80, W * 0.75, 220, W, 150);
-            ctx.lineTo(W, 170);
-            ctx.bezierCurveTo(W * 0.75, 240, W * 0.25, 100, 0, 200);
-            ctx.closePath();
-            ctx.fill();
-
-            // --- END NEW TOP DESIGN ---
 
             const logoScale = W / logoImg.width;
             const logoWidth = W;
             const logoHeight = logoImg.height * logoScale - 70;
-            // Draw logo slightly down from the very top edge
-            ctx.drawImage(logoImg, 0, 20, logoWidth, logoHeight);
+            ctx.drawImage(logoImg, 0, 0, logoWidth, logoHeight);
 
+            ctx.fillStyle = colors.cyanAccent;
+            ctx.beginPath();
+            ctx.moveTo(0, 320);
+            ctx.bezierCurveTo(W * 0.3, 200, W * 0.6, 400, W, 300);
+            ctx.lineTo(W, 350);
+            ctx.bezierCurveTo(W * 0.6, 450, W * 0.3, 250, 0, 370);
+            ctx.closePath();
+            ctx.fill();
 
-            // Removed previous cyan accent wave here as it clashes with the new top design
-
-            // Adjusted Photo Position
             const photoRadius = 155;
             const px = W / 2;
-            const py = 300; // Moved up
+            const py = 340;
 
-            // Photo Border
             ctx.beginPath();
             ctx.arc(px, py, photoRadius + 8, 0, Math.PI * 2);
             ctx.fillStyle = colors.white;
             ctx.fill();
 
-            // Photo Itself
             ctx.save();
             ctx.beginPath();
             ctx.arc(px, py, photoRadius, 0, Math.PI * 2);
@@ -306,28 +295,26 @@
             ctx.drawImage(userImg, px - photoRadius, py - photoRadius, photoRadius * 2, photoRadius * 2);
             ctx.restore();
 
-            // Adjusted Text & QR Positions
             ctx.textAlign = 'center';
             ctx.fillStyle = colors.darkText;
             ctx.font = 'bold 50px Times New Roman';
-            ctx.fillText(name.toUpperCase(), W / 2, 520);
+            ctx.fillText(name.toUpperCase(), W / 2, 565);
 
             ctx.fillStyle = colors.deepBlue;
             ctx.font = 'bold 28px Times New Roman';
-            ctx.fillText(role.toUpperCase(), W / 2, 570);
+            ctx.fillText(role.toUpperCase(), W / 2, 615);
 
             ctx.fillStyle = '#111111';
             ctx.font = 'bold 30px Times New Roman';
-            ctx.fillText(company.toUpperCase(), W / 2, 610);
+            ctx.fillText(company.toUpperCase(), W / 2, 650);
 
             const qrSize = 180;
-            ctx.drawImage(qrImg, (W / 2) - (qrSize / 2), 670, qrSize, qrSize);
+            ctx.drawImage(qrImg, (W / 2) - (qrSize / 2), 700, qrSize, qrSize);
 
             ctx.font = 'bold 16px Times New Roman';
             ctx.fillStyle = '#000000';
-            ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 880);
+            ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 900);
 
-            // Bottom Blue Shape (kept for consistency)
             ctx.fillStyle = colors.deepBlue;
             ctx.beginPath();
             ctx.moveTo(0, H);
@@ -344,7 +331,7 @@
 
         function generateBg() {
             const container = document.getElementById('loopContainer');
-            const phrase = "NEW YEAR 2026   ".repeat(30);
+            const phrase = "AVSEC   ".repeat(30);
             const rows = 60;
 
             for (let i = 0; i < rows; i++) {

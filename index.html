@@ -252,7 +252,7 @@
             const W = canvas.width;
             const H = canvas.height;
 
-            ctx.fillStyle = colors.new;
+            ctx.fillStyle = colors.white;
             ctx.fillRect(0, 0, W, H);
 
             const topGrad = ctx.createLinearGradient(0, 0, W, 300);
@@ -272,7 +272,7 @@
             const logoHeight = logoImg.height * logoScale - 70;
             ctx.drawImage(logoImg, 0, 0, logoWidth, logoHeight);
 
-            ctx.fillStyle = colors.black;
+            ctx.fillStyle = colors.white;
             ctx.beginPath();
             ctx.moveTo(0, 320);
             ctx.bezierCurveTo(W * 0.3, 200, W * 0.6, 400, W, 300);
@@ -287,7 +287,7 @@
 
             ctx.beginPath();
             ctx.arc(px, py, photoRadius + 8, 0, Math.PI * 2);
-            ctx.fillStyle = colors.black;
+            ctx.fillStyle = colors.cyanAccent;
             ctx.fill();
 
             ctx.save();
@@ -317,7 +317,7 @@
             ctx.fillStyle = '#000000';
             ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 900);
 
-            ctx.fillStyle = colors.black;
+            ctx.fillStyle = colors.cyanAccent;
             ctx.beginPath();
             ctx.moveTo(0, H);
             ctx.lineTo(W, H);
@@ -347,6 +347,7 @@
     </script>
 </body>
 </html>
+
 
 
 

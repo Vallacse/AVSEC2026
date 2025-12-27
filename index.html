@@ -213,7 +213,8 @@
             darkText: '#2c3e50',
             lightText: '#7f8c8d',
             new: '#60ff91',
-            black: '#111111'
+            black: '#111111',
+            green: '#00D100'
         };
 
         const logoImg = new Image();
@@ -287,7 +288,7 @@
 
             ctx.beginPath();
             ctx.arc(px, py, photoRadius + 8, 0, Math.PI * 2);
-            ctx.fillStyle = colors.cyanAccent;
+            ctx.fillStyle = colors.green;
             ctx.fill();
 
             ctx.save();
@@ -317,7 +318,7 @@
             ctx.fillStyle = '#000000';
             ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 900);
 
-            ctx.fillStyle = colors.cyanAccent;
+            ctx.fillStyle = colors.green;
             ctx.beginPath();
             ctx.moveTo(0, H);
             ctx.lineTo(W, H);
@@ -347,6 +348,7 @@
     </script>
 </body>
 </html>
+
 
 
 

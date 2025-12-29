@@ -1,353 +1,721 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
+
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AVSEC FUTURE ID GENERATOR</title>
+
     <style>
+
         :root {
+
             --grad-start: #8e2de2;
+
             --grad-end: #4a00e0;
+
             --accent-cyan: #70e1f5;
+
             --bg-color: #f0f2f5;
+
             --text-dark: #111;
+
         }
+
+
 
         * {
+
             box-sizing: border-box;
+
             margin: 0;
+
             padding: 0;
+
         }
+
+
 
         body {
+
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
             background-color: var(--bg-color);
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             min-height: 100vh;
+
             padding: 15px; /* Better padding for mobile */
+
             overflow-x: hidden;
+
         }
+
+
 
         /* Dynamic Loop Background */
+
         .loop-container {
+
             position: fixed;
+
             top: -50%;
+
             left: -50%;
+
             width: 200%;
+
             height: 200%;
+
             z-index: -1;
+
             transform: rotate(-25deg);
+
             display: flex;
+
             flex-direction: column;
+
             justify-content: center;
+
             pointer-events: none;
+
             background: #ffffff;
+
             opacity: 0.5;
+
         }
+
+
 
         .loop-row {
+
             font-family: 'Times New Roman', Times, serif;
+
             white-space: nowrap;
+
             font-size: 1.2rem;
+
             font-weight: 600;
+
             letter-spacing: 6px;
+
             color: rgba(0, 0, 0, 0.08);
+
             line-height: 1.8;
+
         }
+
+
 
         .loop-row:nth-child(odd) { animation: slideLeft 40s linear infinite; }
+
         .loop-row:nth-child(even) { animation: slideRight 45s linear infinite; }
 
+
+
         @keyframes slideLeft { from { transform: translateX(0); } to { transform: translateX(-1000px); } }
+
         @keyframes slideRight { from { transform: translateX(-1000px); } to { transform: translateX(0); } }
 
+
+
         /* Form Box Responsiveness */
+
         .form-box {
+
             background: white;
+
             padding: 25px;
+
             border-radius: 15px;
+
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
             width: 100%;
+
             max-width: 450px; /* Standard form width */
+
             z-index: 10;
+
         }
+
+
 
         /* Fixed Logo Container inside the form */
+
         .logo-wrapper {
+
             width: 100%;
+
             height: auto;
+
             min-height: 60px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             margin-bottom: 20px;
+
             border-bottom: 1px solid #eee;
+
             padding-bottom: 15px;
+
         }
+
+
 
         .header_logo {
+
             max-width: 100%;
+
             height: auto;
+
             max-height: 130px; /* Limits size on desktop while staying responsive */
+
             object-fit: contain;
+
         }
+
+
 
         h2 {
+
             color: var(--grad-end);
+
             text-align: center;
+
             margin-bottom: 20px;
+
             font-size: 1.4rem;
+
         }
+
+
 
         .form-group {
+
             margin-bottom: 15px;
+
         }
+
+
 
         label {
+
             display: block;
+
             margin-bottom: 6px;
+
             font-weight: 600;
+
             color: #444;
+
             font-size: 0.9rem;
+
         }
+
+
 
         input[type="text"],
+
         input[type="file"] {
+
             width: 100%;
+
             padding: 10px 12px;
+
             border: 2px solid #ddd;
+
             border-radius: 8px;
+
             font-size: 1rem;
+
             outline: none;
+
             transition: border-color 0.3s;
+
         }
+
+
 
         input:focus {
+
             border-color: var(--grad-start);
+
         }
+
+
 
         button {
+
             width: 100%;
+
             padding: 14px;
+
             background: linear-gradient(to right, var(--grad-start), var(--grad-end));
+
             color: white;
+
             border: none;
+
             border-radius: 8px;
+
             font-size: 1rem;
+
             font-weight: bold;
+
             cursor: pointer;
+
             margin-top: 10px;
+
             transition: transform 0.2s, box-shadow 0.2s;
+
         }
+
+
 
         button:active {
+
             transform: scale(0.98);
+
         }
+
+
 
         #idCanvas {
+
             display: none;
+
         }
+
+
 
         /* Mobile Adjustments */
+
         @media (max-width: 480px) {
+
             .form-box {
+
                 padding: 20px;
+
             }
+
             h2 {
+
                 font-size: 1.2rem;
+
             }
+
             .header_logo {
+
                 max-height: 130px;
+
             }
+
         }
+
     </style>
+
 </head>
 
+
+
 <body>
+
     <div class="loop-container" id="loopContainer"></div>
 
+
+
     <div class="form-box">
+
         <div class="logo-wrapper">
+
             <img src="./logo.png" alt="College Logo" class="header_logo" />
+
         </div>
+
         
+
         <h2>FUTURE IDENTITY CARD</h2>
 
+
+
         <form id="idForm">
+
             <div class="form-group">
+
                 <label>YOUR NAME</label>
+
                 <input type="text" id="name" placeholder="John Doe" required>
+
             </div>
+
             <div class="form-group">
+
                 <label>DREAM ROLE</label>
+
                 <input type="text" id="role" placeholder="e.g. AI Specialist" required>
+
             </div>
+
             <div class="form-group">
+
                 <label>DREAM COMPANY</label>
+
                 <input type="text" id="company" placeholder="e.g. Google" required>
+
             </div>
+
             <div class="form-group">
+
                 <label>YOUR PHOTO</label>
+
                 <input type="file" id="photo" accept="image/*" required>
+
             </div>
+
             <button type="submit">GET YOUR DREAM ID CARD</button>
+
         </form>
+
     </div>
+
+
 
     <canvas id="idCanvas" width="800" height="1000"></canvas>
 
+
+
     <script>
+
         // ... (Keep your existing JavaScript code as it handles the logic perfectly) ...
+
         const form = document.getElementById('idForm');
+
         const canvas = document.getElementById('idCanvas');
+
         const ctx = canvas.getContext('2d');
 
+
+
         const colors = {
+
             purple: '#8e2de2',
+
             deepBlue: '#4a00e0',
+
             cyanAccent: '#70e1f5',
+
             white: '#ffffff',
+
             darkText: '#2c3e50',
+
             lightText: '#7f8c8d',
+
             new: '#60ff91',
+
             black: '#111111',
+
             green: '#00D100'
+
         };
 
+
+
         const logoImg = new Image();
+
         logoImg.src = './logo.png';
 
+
+
         form.addEventListener('submit', async (e) => {
+
             e.preventDefault();
 
+
+
             const name = document.getElementById('name').value;
+
             const role = document.getElementById('role').value;
+
             const company = document.getElementById('company').value;
+
             const photoFile = document.getElementById('photo').files[0];
 
+
+
             const userImg = await new Promise((resolve) => {
+
                 const reader = new FileReader();
+
                 reader.onload = (event) => {
+
                     const img = new Image();
+
                     img.onload = () => resolve(img);
+
                     img.src = event.target.result;
+
                 };
+
                 reader.readAsDataURL(photoFile);
+
             });
+
+
 
             const qrData = `https://www.google.com/search?q=${encodeURIComponent(role)}+at+${encodeURIComponent(company)}`;
+
             const qrImg = await new Promise((resolve) => {
+
                 const img = new Image();
+
                 img.crossOrigin = "anonymous";
+
                 img.onload = () => resolve(img);
+
                 img.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qrData)}&color=4a00e0`;
+
             });
 
+
+
             drawIDCard(name, role, company, userImg, qrImg);
+
         });
 
+
+
         function drawIDCard(name, role, company, userImg, qrImg) {
+
             const W = canvas.width;
+
             const H = canvas.height;
 
+
+
             ctx.fillStyle = colors.white;
+
             ctx.fillRect(0, 0, W, H);
 
+
+
             const topGrad = ctx.createLinearGradient(0, 0, W, 300);
+
             topGrad.addColorStop(0, colors.white);
+
             topGrad.addColorStop(1, colors.white);
+
             ctx.fillStyle = topGrad;
+
             ctx.beginPath();
+
             ctx.moveTo(0, 0);
+
             ctx.lineTo(W, 0);
+
             ctx.lineTo(W, 300);
+
             ctx.bezierCurveTo(W * 0.6, 400, W * 0.3, 200, 0, 320);
+
             ctx.closePath();
+
             ctx.fill();
 
+
+            // Top Logo Placement
             const logoScale = W / logoImg.width;
             const logoWidth = W;
-            const logoHeight = logoImg.height * logoScale - 70;
+            const logoHeight = logoImg.height * logoScale - 50;
             ctx.drawImage(logoImg, 0, 0, logoWidth, logoHeight);
 
-            ctx.fillStyle = colors.white;
-            ctx.beginPath();
-            ctx.moveTo(0, 320);
-            ctx.bezierCurveTo(W * 0.3, 200, W * 0.6, 400, W, 300);
-            ctx.lineTo(W, 350);
-            ctx.bezierCurveTo(W * 0.6, 450, W * 0.3, 250, 0, 370);
-            ctx.closePath();
-            ctx.fill();
-
-            const photoRadius = 155;
-            const px = W / 2;
-            const py = 340;
-
-            ctx.beginPath();
-            ctx.arc(px, py, photoRadius + 8, 0, Math.PI * 2);
+            // --- ADDED TITLE: FUTURE ID CARD BELOW LOGO ---
+            ctx.textAlign = 'center';
             ctx.fillStyle = colors.deepBlue;
+            ctx.font = 'bold 42px Times New Roman';
+            ctx.fillText("FUTURE IDENTITY CARD", W / 2, logoHeight + 30);
+            // ----------------------------------------------
+
+
+
+            ctx.fillStyle = colors.white;
+
+            ctx.beginPath();
+
+            ctx.moveTo(0, 320);
+
+            ctx.bezierCurveTo(W * 0.3, 200, W * 0.6, 400, W, 300);
+
+            ctx.lineTo(W, 350);
+
+            ctx.bezierCurveTo(W * 0.6, 450, W * 0.3, 250, 0, 370);
+
+            ctx.closePath();
+
             ctx.fill();
+
+
+
+            const photoRadius = 120;
+
+            const px = W / 2;
+
+            const py = 380;
+
+
+
+            ctx.beginPath();
+
+            ctx.arc(px, py, photoRadius + 8, 0, Math.PI * 2);
+
+            ctx.fillStyle = colors.deepBlue;
+
+            ctx.fill();
+
+
 
             ctx.save();
+
             ctx.beginPath();
+
             ctx.arc(px, py, photoRadius, 0, Math.PI * 2);
+
             ctx.clip();
+
             ctx.drawImage(userImg, px - photoRadius, py - photoRadius, photoRadius * 2, photoRadius * 2);
+
             ctx.restore();
 
+
+
             ctx.textAlign = 'center';
+
             ctx.fillStyle = colors.darkText;
+
             ctx.font = 'bold 50px Times New Roman';
+
             ctx.fillText(name.toUpperCase(), W / 2, 565);
 
+
+
             ctx.fillStyle = colors.deepBlue;
+
             ctx.font = 'bold 28px Times New Roman';
+
             ctx.fillText(role.toUpperCase(), W / 2, 615);
 
+
+
             ctx.fillStyle = '#111111';
+
             ctx.font = 'bold 30px Times New Roman';
+
             ctx.fillText(company.toUpperCase(), W / 2, 650);
 
+
+
             const qrSize = 180;
+
             ctx.drawImage(qrImg, (W / 2) - (qrSize / 2), 700, qrSize, qrSize);
 
+
+
             ctx.font = 'bold 16px Times New Roman';
+
             ctx.fillStyle = '#000000';
+
             ctx.fillText("SCAN TO VIEW CAREER PATH", W / 2, 900);
 
+
+
             ctx.fillStyle = colors.deepBlue;
+
             ctx.beginPath();
+
             ctx.moveTo(0, H);
+
             ctx.lineTo(W, H);
+
             ctx.lineTo(W, H - 40);
+
             ctx.quadraticCurveTo(W / 2, H - 100, 0, H - 40);
+
             ctx.fill();
 
+
+
             const link = document.createElement('a');
+
             link.download = `${name}_Career_ID.png`;
+
             link.href = canvas.toDataURL('image/png');
+
             link.click();
+
         }
+
+
 
         function generateBg() {
+
             const container = document.getElementById('loopContainer');
+
             const phrase = "NEW YEAR 2026   ".repeat(30);
+
             const rows = 60;
 
+
+
             for (let i = 0; i < rows; i++) {
+
                 const div = document.createElement('div');
+
                 div.className = 'loop-row';
+
                 div.textContent = phrase;
+
                 container.appendChild(div);
+
             }
+
         }
+
         generateBg();
+
     </script>
+
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

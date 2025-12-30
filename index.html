@@ -540,14 +540,14 @@
             // Top Logo Placement
             const logoScale = W / logoImg.width;
             const logoWidth = W;
-            const logoHeight = logoImg.height * logoScale - 50;
+            const logoHeight = logoImg.height * logoScale - 30;
             ctx.drawImage(logoImg, 0, 0, logoWidth, logoHeight);
 
             // --- ADDED TITLE: FUTURE ID CARD BELOW LOGO ---
             ctx.textAlign = 'center';
             ctx.fillStyle = colors.deepBlue;
             ctx.font = 'bold 42px Times New Roman';
-            ctx.fillText("DREAM ID CARD", W / 2, logoHeight + 30);
+            ctx.fillText("DREAM ID CARD", W / 2, logoHeight + 20);
             // ----------------------------------------------
 
 
@@ -701,6 +701,7 @@
 </body>
 
 </html>
+
 
 
 
